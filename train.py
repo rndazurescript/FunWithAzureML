@@ -16,10 +16,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--data-folder', type=str, dest='data_folder', help='data folder mounting point')
 args = parser.parse_args()
 
-print('Data folder:', data_folder)
-if os.path.isdir(data_folder):
+print('Data folder:', args.data_folder)
+if os.path.isdir(args.data_folder):
     print('Listing contents of data folder:')
-    print(os.listdir(data_folder))
+    print(os.listdir(args.data_folder))
 
 os.makedirs('./outputs', exist_ok=True)
 
