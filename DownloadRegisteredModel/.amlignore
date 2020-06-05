@@ -1,5 +1,7 @@
 # All notebooks
 *.ipynb
+# All documentation
+*.md
 # All hidden files
 .*
 # No need to push that as it's part of the configuration
