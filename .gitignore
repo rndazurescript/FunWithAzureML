@@ -137,3 +137,4 @@ settings.json
 
 # Artifacts uploaded to azureML
 workspace/
+.ipynb_aml_checkpoints
