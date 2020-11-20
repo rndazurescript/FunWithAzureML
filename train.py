@@ -1,5 +1,6 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license.
+# Add comment hello
 
 from sklearn.datasets import load_diabetes
 from sklearn.linear_model import Ridge
