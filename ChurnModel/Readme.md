@@ -25,4 +25,5 @@ Normally we would also need monetary values as described in the [RFM marketing m
 ## Instructions
 
 - Run `UploadDataset.ipynd` to upload sample to default datastore
+- Run `CreateTrainingPipeline.ipynb` to register the training pipeline that takes country as a parameter
 - 
