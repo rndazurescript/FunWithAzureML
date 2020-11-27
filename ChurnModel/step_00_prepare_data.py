@@ -1,6 +1,4 @@
-# Training based on
-# https://github.com/microsoft/LightGBM/blob/master/examples/python-guide/advanced_example.py
-
+# Prepare data to be ready for consumption by the training process
 import numpy as np
 import pandas as pd
 
