@@ -37,9 +37,9 @@ test_data=joblib.load(os.path.join(input_path,'test_dataset.joblib'))
 #
 
 def log_metrics():
-    from azureml.core import Run
+    from azureml.core import Run, _OfflineRun
     run = Run.get_context()
-    isOffline = run.id.startswith('OfflineRun')
+    isOffline = (type(run) == _OfflineRun)
 
     def callback(env):
         if not isOffline:

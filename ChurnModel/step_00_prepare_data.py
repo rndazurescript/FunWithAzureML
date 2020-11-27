@@ -28,8 +28,15 @@ if not os.path.exists(output_path):
 # We are using the default datastore but you could have used a different one as well
 import azureml.core
 from azureml.core import Workspace, Datastore, Dataset
+from azureml.core.run import Run, _OfflineRun
 
-ws = Workspace.from_config()
+run = Run.get_context()
+ws = None
+if type(run) == _OfflineRun:
+    ws = Workspace.from_config()
+else:
+    ws = run.experiment.workspace
+
 datastore = ws.get_default_datastore()
 
 parquet_files = [(datastore, f"{file_path}/*.parquet")]

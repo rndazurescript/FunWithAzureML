@@ -15,7 +15,15 @@ input_path = args.input_path
 target_model_name=f"churn_model_{args.country}"
 
 from azureml.core import Workspace, Model
-ws = Workspace.from_config()
+from azureml.core.run import Run, _OfflineRun
+
+run = Run.get_context()
+ws = None
+if type(run) == _OfflineRun:
+    ws = Workspace.from_config()
+else:
+    ws = run.experiment.workspace
+
 model = Model.register(ws, 
                         model_name=target_model_name, 
                         model_path=input_path, 

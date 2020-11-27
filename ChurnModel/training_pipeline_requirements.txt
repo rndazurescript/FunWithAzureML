@@ -7,3 +7,4 @@ pandas==0.25.3
 sklearn-pandas==1.7.0
 lightgbm==2.3.0
 joblib==0.14.1
+azureml-sdk==1.18.0
