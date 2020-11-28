@@ -12,7 +12,7 @@ args = parser.parse_args()
 
 input_path = args.input_path
 
-target_model_name=f"churn_model_{args.country}"
+target_model_name = f"churn_model_{args.country}"
 
 from azureml.core import Workspace, Model
 from azureml.core.run import Run, _OfflineRun
@@ -25,21 +25,20 @@ else:
     ws = run.experiment.workspace
 
 # Load metadata from the training process
-import json 
+import json
 tags = {}
-with open(os.path.join(input_path,"model.tags.json"), "r") as read_file:
+with open(os.path.join(input_path, "model.tags.json"), "r") as read_file:
     print("Converting JSON encoded tag data into Python dictionary")
     tags = json.load(read_file)
 # Add pipeline metadata
 tags['country'] = args.country
 tags['type'] = "churn"
 
-model = Model.register(ws, 
-                        model_name=target_model_name, 
-                        model_path=input_path, 
-                        tags= tags, 
-                        model_framework='LightGBM',
-                        model_framework_version=lgb.__version__)
-
+model = Model.register(ws,
+                       model_name=target_model_name,
+                       model_path=input_path,
+                       tags=tags,
+                       model_framework='LightGBM',
+                       model_framework_version=lgb.__version__)
 
 print(f"Registered version {model.version} for model {model.name}")
