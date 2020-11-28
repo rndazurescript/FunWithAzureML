@@ -43,7 +43,7 @@ def log_metrics():
 
     def callback(env):
         if not isOffline:
-            # Log AUC for this itteration
+            # Log metric for this itteration (in this case auc as defined in the parameters)
             # https://github.com/microsoft/LightGBM/blob/742d72f8bb051105484fd5cca11620493ffb0b2b/python-package/lightgbm/callback.py#L71
             run.log(env.evaluation_result_list[0][1],env.evaluation_result_list[0][2])
 
@@ -51,36 +51,48 @@ def log_metrics():
     callback.order = 0
     return callback
 
+# Based on AutoML ExtremeRandomTrees seems to perform well
+# We will use https://github.com/microsoft/LightGBM/pull/2671
 
 parameters = {
     'application': 'binary',
     'objective': 'binary',
     'metric': 'auc',
     'is_unbalance': 'true',
-    'boosting': 'gbdt',
     'num_leaves': 31,
     'feature_fraction': 0.5,
-    'bagging_fraction': 0.5,
-    'bagging_freq': 20,
     'learning_rate': 0.05,
-    'verbose': 0
+    'verbose': 0,
+    'extra_trees': 'true',
+    'boosting': 'rf', # The original code was using gbdt
+    'bagging_freq': 1,
+    'bagging_fraction': 0.8,
 }
+
+results = {}
 
 model = lgb.train(parameters,
                        train_data,
                        valid_sets=test_data,
                        num_boost_round=5000,
                        early_stopping_rounds=100,
-                       callbacks=[log_metrics()]
+                       callbacks=[log_metrics()],
+                       evals_result=results
                        )
 
+# Store results as json
+import json 
+with open(os.path.join(output_path,"evaluation_results.json"), "w") as write_file:
+    json.dump(results, write_file)
+
+# Store feature importance as csv
 feature_importance = pd.DataFrame(
                              list(zip(model.feature_name(), model.feature_importance())),
                              columns=['feature','importance']
                              )
 feature_importance.to_csv(os.path.join(output_path,'model.feature_importance.csv'), index=False)
 
+# Store actual model as joblib dump
 joblib.dump(value=model, filename=os.path.join(output_path,'model.joblib'))
-
 
 print(f"Stored model and metadata in {output_path}")

@@ -32,4 +32,4 @@ model = Model.register(ws,
                         model_framework_version=lgb.__version__)
 
 
-print(f"Registered version {model.version} for model  {model.name}")
+print(f"Registered version {model.version} for model {model.name}")
