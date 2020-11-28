@@ -54,10 +54,12 @@ def log_metrics():
 # Based on AutoML ExtremeRandomTrees seems to perform well
 # We will use https://github.com/microsoft/LightGBM/pull/2671
 
+metric = 'auc'
+
 parameters = {
     'application': 'binary',
     'objective': 'binary',
-    'metric': 'auc',
+    'metric': metric,
     'is_unbalance': 'true',
     'num_leaves': 31,
     'feature_fraction': 0.5,
@@ -70,10 +72,11 @@ parameters = {
 }
 
 results = {}
-
+validation_set_name='test_dataset' # The name that will appear in the evaluation results
 model = lgb.train(parameters,
                        train_data,
                        valid_sets=test_data,
+                       valid_names=[validation_set_name],
                        num_boost_round=5000,
                        early_stopping_rounds=100,
                        callbacks=[log_metrics()],
@@ -84,6 +87,17 @@ model = lgb.train(parameters,
 import json 
 with open(os.path.join(output_path,"evaluation_results.json"), "w") as write_file:
     json.dump(results, write_file)
+
+# Store info for tagging the model
+from datetime import datetime
+tags = {
+  'metric': metric,
+  'best_score' : model.best_score[validation_set_name][metric],
+  'best_iteration': model.best_iteration,
+  'trained_date': datetime.now().isoformat(),
+}
+with open(os.path.join(output_path,"model.tags.json"), "w") as write_file:
+    json.dump(tags, write_file)
 
 # Store feature importance as csv
 feature_importance = pd.DataFrame(

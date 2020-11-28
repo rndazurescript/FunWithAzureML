@@ -24,10 +24,20 @@ if type(run) == _OfflineRun:
 else:
     ws = run.experiment.workspace
 
+# Load metadata from the training process
+import json 
+tags = {}
+with open(os.path.join(input_path,"model.tags.json"), "r") as read_file:
+    print("Converting JSON encoded tag data into Python dictionary")
+    tags = json.load(read_file)
+# Add pipeline metadata
+tags['country'] = args.country
+tags['type'] = "churn"
+
 model = Model.register(ws, 
                         model_name=target_model_name, 
                         model_path=input_path, 
-                        tags={ "country": args.country, "type": "churn" }, 
+                        tags= tags, 
                         model_framework='LightGBM',
                         model_framework_version=lgb.__version__)
 
