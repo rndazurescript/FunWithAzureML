@@ -25,5 +25,11 @@ Normally we would also need monetary values as described in the [RFM marketing m
 ## Instructions
 
 - Run `UploadDataset.ipynd` to upload sample to default datastore
+- [Optionally] Execute all python `step_*` files to run the training process locally
 - Run `CreateTrainingPipeline.ipynb` to register the training pipeline that takes country as a parameter
-- 
+- Execute the training pipeline to register a model
+
+
+## TODOs
+
+- Convert [model to onnx]](https://github.com/onnx/onnxmltools) and inference using ml.net

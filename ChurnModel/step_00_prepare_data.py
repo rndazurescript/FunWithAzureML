@@ -38,6 +38,15 @@ datastore = ws.get_default_datastore()
 
 parquet_files = [(datastore, f"{file_path}/*.parquet")]
 dataset = Dataset.Tabular.from_parquet_files(path=parquet_files)
+
+# Register dataset to keep track of the parquet files that
+# were used for this training. Normally we would store the
+# transformed dataset to keep version of the transformations.
+dataset.register(workspace=ws,
+                 name=f"churn-training-{args.country}",
+                 description=f"training data for {args.country}")
+
+# Load in memory to work with pandas
 train = dataset.to_pandas_dataframe()
 
 # If you want clean up dataset here
