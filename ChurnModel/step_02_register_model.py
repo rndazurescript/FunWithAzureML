@@ -52,8 +52,10 @@ if type(run) == _OfflineRun:
 else:
     # Associate the experiment and the run_id with this
     # model registration
+    # We need to upload artifact first to the run
+    run.upload_folder("model", input_path)
     model = run.register_model(model_name=target_model_name,
-                               model_path=input_path,
+                               model_path="model",
                                tags=tags,
                                model_framework='LightGBM',
                                model_framework_version=lgb.__version__,
