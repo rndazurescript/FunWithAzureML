@@ -48,6 +48,10 @@ dataset.register(workspace=ws,
 
 # Load in memory to work with pandas
 train = dataset.to_pandas_dataframe()
+train_memory_usage = train.memory_usage(index=False, deep=True)
+train_memory_usage.index.name = 'column'
+train_memory_usage.to_csv(os.path.join(output_path, 'dataset.memory_usage.csv'), header=['memory_usage_in_bytes'])
+
 
 # If you want clean up dataset here
 
