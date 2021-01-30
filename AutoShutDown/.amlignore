@@ -1,0 +1,12 @@
+# Don't push not needed files to the step snapsot
+# Read more https://docs.microsoft.com/en-us/azure/machine-learning/how-to-set-up-training-targets#submit-the-experiment
+*.ipynb
+.amlignore
+.flake8
+*.parquet
+*.md
+*.csv
+.ipynb_checkpoints
+.config
+*.amltmp
+__pycache__
