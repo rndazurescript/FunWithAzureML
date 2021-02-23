@@ -1,26 +1,28 @@
 import joblib
 import logging
 import pandas as pd
+from os import path
 
 
 class ChurnModel(object):
     def __init__(self, country=None, version=None):
         model_name = f"churn_model_{country}"
-        model_path = self._get_model_directory(model_name, version)
-        self.model = joblib.load(f"{model_path}/model.joblib")
+        model_directory = self._get_model_directory(model_name, version)
+        model_path = path.join(model_directory, "model.joblib")
+        self.model = joblib.load(model_path)
         logging.info(f"Model features: {self.model.feature_name()}")
 
     def _get_model_directory(self, model_name, version):
-        model_path = "./model"  # Load local if not attached to AzureML
+        model_directory = "./model"  # Load local if not attached to AzureML
         from azureml.core.model import Model
         from azureml.exceptions import ModelNotFoundException
         try:
-            model_path = Model.get_model_path(model_name, version=version)
+            model_directory = Model.get_model_path(model_name, version=version)
         except ModelNotFoundException as e:
             logging.debug(e)
             logging.info("Could not load model from AzureML cache")
-        logging.info(f"{model_name} location is {model_path}")
-        return model_path
+        logging.info(f"{model_name} location is {model_directory}")
+        return model_directory
 
     def run(self, data):
         # Keep only the columns needed by the model
