@@ -1,7 +1,6 @@
 # Based on the original generated automl code
 # Adapted based on:
 # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-machine-learning-interpretability-automl
-import json
 import logging
 import os
 import numpy as np
@@ -22,8 +21,6 @@ from inference_schema.parameter_types.standard_py_parameter_type import (
     StandardPythonParameterType,
 )
 
-model_name = "automl_diabetes"
-
 try:
     log_server.enable_telemetry(INSTRUMENTATION_KEY)
     log_server.set_verbosity("INFO")
@@ -35,8 +32,14 @@ except Exception as e:
 
 def init():
     global model, explainer
-    # This name is model.id of model that we want to deploy deserialize the model file back
-    # into a sklearn model
+    # This mode name is available in environment variable
+    model_name = os.getenv("model_name")
+    if model_name is None:
+        # If none we default to the name our scripts know
+        model_name = "automl_diabetes"
+        logger.warn(
+            f"Environment variable model_name is not configured. Using hardcoded default value '{model_name}'"
+        )
     model_directory = _get_model_directory(model_name)
     model_path = os.path.join(model_directory, "model.pkl")
     explainer_path = os.path.join(model_directory, "scoring_explainer.pkl")
