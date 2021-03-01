@@ -1,3 +1,4 @@
 model
 .config
+.amlignore
 script_folder
