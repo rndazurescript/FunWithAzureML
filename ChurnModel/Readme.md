@@ -33,3 +33,12 @@ Normally we would also need monetary values as described in the [RFM marketing m
 ## TODOs
 
 - Convert [model to onnx]](https://github.com/onnx/onnxmltools) and inference using ml.net
+
+
+## Things that could be done better
+
+The following best practices were not followed in order to simplify the examples:
+
+- Separate code in folders. Currently we are uploading everything in all step snapshots which also reduces reusability of previously executed steps.
+- Convert `CreateTrainingPipeline.ipynd` to [production ready python code](https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-convert-ml-experiment-to-production). We wanted to document the steps etc but normally this is a python script which is executed after each git push ([Continuous Deployment](https://en.wikipedia.org/wiki/Continuous_deployment)).
+
