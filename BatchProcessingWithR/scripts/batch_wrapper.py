@@ -44,6 +44,6 @@ def run(mini_batch):
 
 
 # The following code will run if we invoke
-# this file directly from
+# this file directly from console
 if __name__ == "__main__":
     init()
