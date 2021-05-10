@@ -1,0 +1,4 @@
+# Exclude uploading temp files
+*.amltmp 
+*.amltemp
+.amlignore
