@@ -40,9 +40,6 @@ def run(mini_batch):
         print("R script called")
         resultList.append("Processed : {}".format(file_path))
 
-    # check_file_path = os.path.join(output_path, "processed.txt")
-    # with open(check_file_path, 'a') as outfile:
-    #    outfile.writelines(resultList)
     return resultList
 
 

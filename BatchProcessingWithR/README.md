@@ -2,6 +2,8 @@
 
 Imagine that you have a number of files you want to batch process with an R script. These can be images (like in this example) or even [RData](https://bookdown.org/ndphillips/YaRrr/rdata-files.html) files that contain tabular datasets.
 
+Open the [notebook](./ParallelRunInR.ipynb) to create a pipeline that executes in parallel an R script, once for each file in the FileDataset you pass as a parameter.
+
 The idea is that you create a pipeline using python with a parallel step. That step is invoking a python script that implements the parallel step contract (see `./scripts/batch_wrapper.py` file for implementation details). That file is invoking Rscript to execute the `./scripts/process_file.r`.
 
 The results of the R script file are stored in the `r-script-outputs` folder on the root of the default store as seen in the following image:
@@ -21,4 +23,3 @@ For the python wrapping have a look on https://github.com/microsoft/MLOpsPython/
 
 - Parallel config: https://docs.microsoft.com/en-us/python/api/azureml-contrib-pipeline-steps/azureml.contrib.pipeline.steps.parallelrunconfig?view=azure-ml-py
 - Sample batch sample: https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/machine-learning-pipelines/parallel-run/tabular-dataset-inference-iris.ipynb
-- 
