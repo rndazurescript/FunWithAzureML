@@ -24,11 +24,8 @@ if (is.null(opt$file)){
 
 cat("\nInput file is:", opt$file)
 cat("\nOutput folder is:", opt$out_folder)
-cat("\nNumber of files in output:",length(list.files(opt$out_folder)))
 
 output_file_name = paste0(basename(opt$file),".csv")
 
 sample_output = data.frame(seq(2))
 write.csv2(sample_output, file.path(opt$out_folder, output_file_name))
-
-cat("\nNew number of files in output:",length(list.files(opt$out_folder)))
