@@ -4,6 +4,11 @@ Imagine that you have a number of files you want to batch process with an R scri
 
 The idea is that you create a pipeline using python with a parallel step. That step is invoking a python script that implements the parallel step contract (see `./scripts/batch_wrapper.py` file for implementation details). That file is invoking Rscript to execute the `./scripts/process_file.r`.
 
+The results of the R script file are stored in the `r-script-outputs` folder on the root of the default store as seen in the following image:
+
+![Outputs folder](./output_folder_in_blob_container.png)
+
+
 A potential alternative would have been to use the [RScript step](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.rscriptstep?view=azure-ml-py) directly without a pipeline. In that case you would submit on RScript per file you wanted to process.
 
 ## Inspiration
