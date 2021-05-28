@@ -10,8 +10,10 @@ The results of the R script file are stored in the `r-script-outputs` folder on 
 
 ![Outputs folder](./output_folder_in_blob_container.png)
 
-
 A potential alternative would have been to use the [RScript step](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.rscriptstep?view=azure-ml-py) directly without a pipeline. In that case you would submit on RScript per file you wanted to process.
+
+> Note: Use [lintr](https://github.com/jimhester/lintr) to check your R code for errors before running it in the pipeline
+
 
 ## Inspiration
 
