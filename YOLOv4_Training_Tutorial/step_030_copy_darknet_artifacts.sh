@@ -3,7 +3,7 @@
 mkdir -p cfg
 
 # Copy binary
-cp darknet_repo/darknet ./
+cp darknet_repo/darknet ./darknet.bin
 
 # Copy configuration
 cp darknet_repo/cfg/coco.data cfg/
