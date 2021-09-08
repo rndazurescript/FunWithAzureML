@@ -7,3 +7,6 @@ To test with curl (replace the IP with the one pointing to your ACI):
 ```
 curl -X POST -H "Content-Type: application/json" -d "{}" http://10.2.255.4/score
 ```
+
+Or an [online tool](https://reqbin.com/):
+![Regbin sample](./reqbin_sample.png)
