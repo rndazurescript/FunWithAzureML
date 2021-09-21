@@ -1,4 +1,6 @@
-# Container instances client throw error so:
+# ContainerInstanceManagementClient was not updated to the new Auth model
+# so we used a wrapper instead of DefaultAzureCredential in the past.
+# Container instances client threw error so:
 # https://docs.microsoft.com/en-us/azure/developer/python/azure-sdk-authenticate?tabs=cmd#defaultazurecredential-object-has-no-attribute-signed-session
 # Wrap credentials from azure-identity to be compatible with SDK that needs msrestazure or azure.common.credentials
 # Need msrest >= 0.6.0

@@ -7,6 +7,7 @@
 *.md
 *.csv
 .ipynb_checkpoints
+.ipynb_aml_checkpoints
 .config
 *.amltmp
 __pycache__

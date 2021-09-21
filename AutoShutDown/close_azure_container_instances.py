@@ -1,13 +1,9 @@
 # The compute cluster has managed identity that will be used to shut down the ACI
 # that may be spinned up from the AutoML interface
 from azure.mgmt.containerinstance import ContainerInstanceManagementClient
+from azure.identity import DefaultAzureCredential
 from azureml.core import Workspace
 from azureml.core.run import Run, _OfflineRun
-# ContainerInstanceManagementClient has not been updated to the new Auth model
-# so we use a wrapper instead of DefaultAzureCredential
-from cred_wrapper import CredentialWrapper
-# from azure.identity import DefaultAzureCredential
-
 
 # Get workspace
 run = Run.get_context()
@@ -22,7 +18,7 @@ subscription_id = ws.subscription_id
 resource_group = ws.resource_group
 
 # Acquire a credential object
-credential = CredentialWrapper()  # DefaultAzureCredential()
+credential = DefaultAzureCredential()
 
 # https://docs.microsoft.com/en-us/python/api/azure-mgmt-containerinstance/azure.mgmt.containerinstance.containerinstancemanagementclient?view=azure-python
 aci_client = ContainerInstanceManagementClient(credential, subscription_id)

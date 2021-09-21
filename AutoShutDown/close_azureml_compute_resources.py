@@ -13,10 +13,9 @@ if type(run) == _OfflineRun:
 else:
     ws = run.experiment.workspace
 
-# Use Managed Identity to authenticate
+# We want to use the cluster's Managed Identity to authenticate
 from azureml.core.authentication import MsiAuthentication
 msi_auth = MsiAuthentication()
-
 ws = Workspace(subscription_id=ws.subscription_id,
                resource_group=ws.resource_group,
                workspace_name=ws.name,
