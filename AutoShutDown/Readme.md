@@ -9,4 +9,6 @@ This pipeline runs automatically on a daily schedule and:
 
 You need to provide the needed permissions to the managed identity of the compute cluster that is executing this pipeline to be able to perform all these actions.
 
+![Cluster's permissions in the portal](./ClustersManagedIdentityPermissions.png)
+
 Start from the [jupiter notebooks that creates the pipeline](./ScheduleAutoShutdown.ipynb)
