@@ -27,3 +27,12 @@ pip install --upgrade pyodbc
 ```
 
 ![ODBC is installed](InterestingSnippets,OdbcDriversInstalledInCI.png)
+
+## Shutdown compute instance on idle
+
+See the work done in:
+
+- https://github.com/matteote/azureml_shutdown_idle_compute_instances/blob/master/scripts/get_compute_instance_info.py
+- https://github.com/csiebler/aml-compute-instance-snippets/blob/master/shutdown-if-inactive/shutdown_if_inactive.py
+
+Schedule the execution of such a script through cron, in the [compute instance setup script](https://github.com/Azure/azureml-examples/tree/main/setup-ci). 
