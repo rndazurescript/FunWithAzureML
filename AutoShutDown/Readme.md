@@ -12,3 +12,8 @@ You need to provide the needed permissions to the managed identity of the comput
 ![Cluster's permissions in the portal](./ClustersManagedIdentityPermissions.png)
 
 Start from the [jupiter notebooks that creates the pipeline](./ScheduleAutoShutdown.ipynb)
+
+## References
+
+- [Create custom roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
+- [Assign roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current)
