@@ -1,0 +1,16 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+command: >
+  pip install requests azure-identity && python job.py --data ${{inputs.adls_path}}
+code:
+  local_path: src
+inputs:
+  adls_path:
+    dataset: azureml:adls-gen2-csv-files:1
+    # folder: azureml://datastores/dataingeststg/folder-with-default-acl-applied/data/
+    # mode: ro_mount
+environment:
+    image: python:latest
+compute: azureml:cpu-cluster-mi
+display_name: test-mount-gen2-from-cli-v2
+experiment_name: cli-v2-experiments
+description: Try to read files from ADLS Gen2 through the managed identity of the cpu-cluster-mi.
