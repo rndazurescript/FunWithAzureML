@@ -5,9 +5,12 @@ code:
   local_path: src
 inputs:
   adls_path:
-    dataset: azureml:adls-gen2-csv-files:1
-    # folder: azureml://datastores/dataingeststg/folder-with-default-acl-applied/data/
-    # mode: ro_mount
+    # Use either dataset
+    # dataset: azureml:adls-gen2-csv-files:1
+    # Or path in datastore (note the /paths/ delimeter between the datastore name and the actual path).
+    # In my case the files are in /folder-with-default-acl-applied/data/.
+    folder: azureml://datastores/dataingeststg/paths/folder-with-default-acl-applied/data/
+    mode: ro_mount
 environment:
     image: python:latest
 compute: azureml:cpu-cluster-mi
