@@ -85,8 +85,39 @@ The `--web` is also an optional parameter. It opens a web browser and you should
 
 Clicking on each step, will get you directly to the logs and you can navigate to each step's output clicking on the **Data outputs** section.
 
+## Run component based pipeline
+
+Instead of having command based steps, you can move the logic into isolated components.
+
+```bash
+az ml job create --file 30.pipeline-with-components.yml --web --set display_name="Component based job from CLI V2"
+```
+
+You can also register the components to be able to re-use them in the designer or your yaml pipelines:
+
+```bash
+az ml component create --file 30.component_a-pre-process-sql-data.yml
+az ml component create --file 30.component_b-train-autoarima-model.yml
+```
+
+After you register the components, you can see them in the designer:
+
+![Components available in designer](./img/designer-based-pipeline.png)
+
+And you can expose component inputs as pipeline parameters with the usual way:
+
+![Define pipeline parameter](./img/define-designer-pipeline-parameters.png)
+
+You can reuse the components as seen in the `40.pipeline-with-registered-components.yml` file. In contrast to the `30.pipeline-with-components.yml` file which needs the `30.component*.yml` files and the `src` folder, the `40.pipeline-with-registered-components.yml` file doesn't need any other file, since the components are already registered in the workspace.
+
+```bash
+az ml job create --file 40.pipeline-with-registered-components.yml --web --set display_name="Register component based job from CLI V2"
+```
+
+![Pipeline with registered components](./img/pipepline-with-registered-components.png)
+
 ## Considerations
 
-Here is a list of some things you will need to consider before going production:
+Here is a list of considerations before going to production:
 
-- **Database connectivy**: How will allow the compute instance to reach the SQL server? You will need to go with network isolation and private endpoints or work on the firewall rules.
+- **Database connectivity**: How will you allow the compute instance to reach the SQL server? You will need to go with network isolation and private endpoints or work on the firewall rules.

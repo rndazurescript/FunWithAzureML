@@ -1,0 +1,24 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: pre-process-sql-data
+display_name: Load data from SQL
+version: 1
+is_deterministic: false
+
+environment: azureml:forecast-r-environment:2022-02-03
+inputs:
+  start_date: 
+     type: integer
+  key_vault:
+     type: string
+outputs:
+  train_data: 
+    type: path
+code:
+  local_path: ./src/step01
+command: >-
+  Rscript step01.process_data.r
+  -s ${{inputs.start_date}}
+  -o ${{outputs.train_data}}
+  -k ${{inputs.key_vault}}

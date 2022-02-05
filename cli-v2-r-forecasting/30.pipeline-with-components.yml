@@ -1,0 +1,33 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+experiment_name: "forecast-training-experiment"
+inputs:
+  pipeline_train_start_date: 20200101
+  pipeline_key_vault_name: 'aiml50dg2aivault'
+outputs: 
+  pipeline_train_data:
+    mode: rw_mount
+  pipeline_trained_model:
+    mode: rw_mount
+  pipeline_predictions:
+    mode: rw_mount
+
+compute: azureml:cpu-cluster-mi
+
+jobs:
+  pre-process-sql-data-step:
+    type: component
+    component: file:./30.component_a-pre-process-sql-data.yml
+    inputs:
+      start_date: ${{inputs.pipeline_train_start_date}}
+      key_vault: ${{inputs.pipeline_key_vault_name}}
+    outputs:
+      train_data: ${{outputs.pipeline_train_data}}
+  train-autoarima-model-step:
+    type: component
+    component: file:./30.component_b-train-autoarima-model.yml
+    inputs:
+      train_data: ${{jobs.pre-process-sql-data-step.outputs.train_data}}
+    outputs:
+      trained_model: ${{outputs.pipeline_trained_model}}
+      prediction: ${{outputs.pipeline_predictions}}
