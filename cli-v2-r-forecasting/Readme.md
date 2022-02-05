@@ -2,7 +2,9 @@
 
 We are going to use the [daily US market data from stooq](https://www.mssqltips.com/sqlservertip/6963/download-stooq-historical-stock-price-volume-data-sql-server/).
 
-The data are inserted in a `forecastdatabase` using the scripts in the [data folder](./data/). In our guidance we use the `forecasting-app` user which is able to read the data.
+The data are inserted in a `forecastdatabase` database which is hosted in an Azure SQL server, using the scripts in the [data folder](./data/). In this tutorial we use the `forecasting-app` sql user which is able to read the data from the database. In this sample the connection string is stored in a key vault and the code uses the compute cluster's managed identity to read that secret.
+
+> It's advised to use Azure Active Directory based authentication to connect to the Azure SQL database, using [managed identity](https://docs.microsoft.com/azure/search/search-howto-managed-identities-sql).
 
 ## Configure your terminal
 
