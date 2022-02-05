@@ -123,6 +123,7 @@ az ml job create --file 40.pipeline-with-registered-components.yml --web --set d
 Here is a list of considerations before going to production:
 
 - **Database connectivity**: How will you allow the compute instance to reach the SQL server? You will need to go with network isolation and private endpoints or work on the firewall rules.
+- **SQL injection attacks in R**: Concatenating strings is a terrible practice in SQL. In this sample, someone can pass `'; Drop table [dbo].[stock_daily];--` as the `pipeline_train_start_date` parameter (if it was not explicitly typed as integer) and if the `forecasting-app` sql user had enough permissions, the table would have been dropped.
 
 ## Working from VS Code
 
