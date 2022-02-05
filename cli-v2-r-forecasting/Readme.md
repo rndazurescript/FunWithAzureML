@@ -123,3 +123,9 @@ az ml job create --file 40.pipeline-with-registered-components.yml --web --set d
 Here is a list of considerations before going to production:
 
 - **Database connectivity**: How will you allow the compute instance to reach the SQL server? You will need to go with network isolation and private endpoints or work on the firewall rules.
+
+## Working from VS Code
+
+This tutorial was created within Visual Studio Code which was attached to my AzureML compute instance. I can use features like [GitHub Autopilot](https://copilot.github.com/) to autocomplete your code, something that was incredibly useful compiling the R scripts (since I have moved to python for a long time now).
+
+![Working in vs code](./img/working-with-vs-code.png)
