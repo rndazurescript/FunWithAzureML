@@ -1,0 +1,55 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+experiment_name: "forecast-training-experiment"
+inputs:
+  pipeline_train_start_date: 20200101
+  pipeline_key_vault_name: 'aiml50dg2aivault'
+outputs: 
+  pipeline_train_data:
+    mode: rw_mount
+  pipeline_trained_model:
+    mode: rw_mount
+  pipeline_predictions:
+    mode: rw_mount
+settings:
+  # You need to create that environment (see Readme.md)
+  environment: azureml:forecast-r-environment:2022-02-03
+  # specify a different store than the workspace default datastore
+  #datastore: azureml:myregistereddatastore
+
+compute: azureml:cpu-cluster-mi
+
+jobs:
+  pre-process-sql-data-step:
+    type: command
+    # This job will use the default compute specified at pipeline job level. 
+    # You can override it if you want something more specialized
+    #compute: azureml:cpu-cluster
+    inputs:
+      start_date: ${{inputs.pipeline_train_start_date}}
+      key_vault: ${{inputs.pipeline_key_vault_name}}
+    outputs:
+      train_data: ${{outputs.pipeline_train_data}}
+    code:
+      # You can use separate folders for each step
+      # to reduce the amount of files uploaded in each step
+      local_path: ./src/step01
+    command: >-
+      Rscript step01.process_data.r
+      -s ${{inputs.start_date}}
+      -o ${{outputs.train_data}}
+      -k ${{inputs.key_vault}}
+  train-autoarima-model-step:
+    type: command
+    inputs:
+      train_data: ${{jobs.pre-process-sql-data-step.outputs.train_data}}
+    outputs:
+      trained_model: ${{outputs.pipeline_trained_model}}
+      prediction: ${{outputs.pipeline_predictions}}
+    code:
+      local_path: ./src/step02
+    command: >-
+      Rscript step02.train_model.r
+      -d ${{inputs.train_data}}
+      -m ${{outputs.trained_model}}
+      -o ${{outputs.prediction}}
