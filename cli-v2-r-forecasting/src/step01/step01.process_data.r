@@ -27,6 +27,7 @@ sql_connection_string <- toString(vault$secrets$get('SQL-CONNECTION')$value)
 SQLServer <- odbcDriverConnect(connection = sql_connection_string)
 
 # Read and process data
+# Desclaimer: SQL Injection sample code bellow. Please use parameters.
 my_query <- paste("SELECT [date],[high] FROM [dbo].[stock_daily] where Cast(date as int) >= '", opt$start_date, "'")
 sqlResult <- sqlQuery(SQLServer, my_query)
 sqlResult$date <- as.Date(as.character(sqlResult$date), format = "%Y%m%d")

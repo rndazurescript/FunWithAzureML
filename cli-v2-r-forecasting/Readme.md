@@ -48,6 +48,20 @@ az ml environment create -f 10.environment.yml
 
 > Note that you can set the version by overriding yaml variable, appending `--set version="2022-02-01"`
 
+### Debugging locally
+
+If you want to debug the docker environment locally, you can build it using the following command:
+
+```bash
+docker build . -t local/r-env
+```
+
+And then mount the source files and run a `/bin/bash` to get inside the docker image and execute your scripts:
+
+```bash
+docker container run -it --entrypoint /bin/bash --mount type=bind,source=/git/FunWithAzureML/cli-v2-r-forecasting/src,target=/mnt local/r-env:latest
+```
+
 ## Configure key vault
 
 You will need to store the SQL server connection string in a key vault. Your [R code](./src/step01/step01.process_data.r) will login to your key vault using the cluster's managed identity and will read the `SQL-CONNECTION` secret.
