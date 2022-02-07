@@ -5,10 +5,10 @@ name: simple-r-script-component-through-cli-v2
 display_name: An R script running as a component
 version: 1
 
-environment: 
+environment: # azureml:forecast-r-environment:2022-02-03 <- Use registered environment
    build: 
-     local_path: environment
-   # image: rocker/tidyverse:4.1
+     local_path: environment # <- Build from docker file
+   # image: rocker/tidyverse:4.1 <- Use image directly from docker hub
 inputs:
   inputA: 
      type: string
