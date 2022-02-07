@@ -1,0 +1,18 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: simple-r-script-component-through-cli-v2
+display_name: An R script running as a component
+version: 1
+
+environment: 
+   build: 
+     local_path: environment
+   # image: rocker/tidyverse:4.1
+inputs:
+  inputA: 
+     type: string
+code:
+  local_path: ./src/
+command: >-
+  Rscript script.r -i ${{inputs.inputA}}
