@@ -22,5 +22,7 @@ Ensure the identity has `execute` permission in all folders within the container
 
 > You can also set in as a `Default permission` something that will place it in any child folder that you will be creating from that point on. It doesn't inherit to existing folders.
 
+> Note that the best practice is to use security groups instead of assigning each identity ACL permissions.
+
 Ensure you have `read` permission at the folder where you want to list the files as seen bellow:
 ![Execute and read permission at target folder](./target_path_ACL.png)
