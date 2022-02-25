@@ -74,7 +74,7 @@ To be able to set that secret, you will need to have the required permissions. Y
 Then set the connection string that will be used by the R scripts.
 
 ```bash
-az keyvault secret set --vault-name <vault_name> --name SQL-CONNECTION --value "Driver={ODBC Driver 17 for SQL Server};server=<sql_server_name>.database.windows.net;database=forecastdatabase;User Id=forecasting-app;Password=<forecasting-app-password>;" "Driver={ODBC Driver 17 for SQL Server};Server=tcp:<sql_server_name>.database.windows.net,1433;Database=forecastdatabase;Uid=forecasting-app;Pwd=<forecasting-app-password>;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+az keyvault secret set --vault-name <vault_name> --name SQL-CONNECTION --value "Driver={ODBC Driver 17 for SQL Server};Server=tcp:<sql_server_name>.database.windows.net,1433;Database=forecastdatabase;Uid=forecasting-app;Pwd=<forecasting-app-password>;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 ```
 
 > The connection string can be found in the Azure portal visiting the Azure SQL database
