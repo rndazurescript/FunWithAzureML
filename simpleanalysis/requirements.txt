@@ -1,0 +1,6 @@
+pyod
+plotly
+numpy
+panda
+seaborn
+xlsxwriter
