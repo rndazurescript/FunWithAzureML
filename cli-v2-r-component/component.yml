@@ -7,12 +7,11 @@ version: 1
 
 environment: # azureml:forecast-r-environment:2022-02-03 <- Use registered environment
    build: 
-     local_path: environment # <- Build from docker file
+      dockerfile_path: ./environment/Dockerfile  # <- Build from docker file
    # image: rocker/tidyverse:4.1 <- Use image directly from docker hub
 inputs:
   inputA: 
      type: string
-code:
-  local_path: ./src/
+code: ./src/
 command: >-
   Rscript script.r -i ${{inputs.inputA}}

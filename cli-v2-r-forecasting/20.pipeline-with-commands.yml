@@ -30,10 +30,9 @@ jobs:
       key_vault: ${{inputs.pipeline_key_vault_name}}
     outputs:
       train_data: ${{outputs.pipeline_train_data}}
-    code:
-      # You can use separate folders for each step
-      # to reduce the amount of files uploaded in each step
-      local_path: ./src/step01
+    # You can use separate folders for each step
+    # to reduce the amount of files uploaded in each step
+    code: ./src/step01
     command: >-
       Rscript step01.process_data.r
       -s ${{inputs.start_date}}
@@ -46,8 +45,7 @@ jobs:
     outputs:
       trained_model: ${{outputs.pipeline_trained_model}}
       prediction: ${{outputs.pipeline_predictions}}
-    code:
-      local_path: ./src/step02
+    code: ./src/step02
     command: >-
       Rscript step02.train_model.r
       -d ${{inputs.train_data}}
