@@ -37,7 +37,7 @@ You could use the following notation in your pipeline and component yaml files t
 ```yaml
 environment:
   build:
-    local_path: environment
+    path: environment
 ```
 
 Instead of doing that, we will register the environment in the AzureML workspace and reuse it:

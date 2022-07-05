@@ -14,8 +14,7 @@ outputs:
     type: path
   prediction:
     type: path
-code:
-  local_path: ./src/step02
+code: ./src/step02
 command: >-
   Rscript step02.train_model.r
   -d ${{inputs.train_data}}
