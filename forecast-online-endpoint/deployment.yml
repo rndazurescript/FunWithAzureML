@@ -1,0 +1,11 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: your-deployment-name
+endpoint_name: your-endpoint-name
+model:
+  path: model/model.pkl
+code_configuration:
+  code: score/
+  scoring_script: scoring_file_v_2_0_0.py
+environment: azureml:clonedautoml:1
+instance_type: Standard_DS2_v2
+instance_count: 1
