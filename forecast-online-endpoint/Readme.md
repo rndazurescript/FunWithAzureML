@@ -3,7 +3,7 @@
 [Optional] If you face issues using the [AzureML-AutoML image](https://ml.azure.com/environments/AzureML-AutoML/version/115) in your own environment (e.g. behind vnet) you can clone it.
 
 1. Run `step010_clone_automl_environment.py`.
-1. In your custom environments you should have a new environment registered, named `clonedautoml`. Build it, because otherwise you may get the following error `Message: ResourceNotFound: Deployment failed due to timeout while waiting for Environment Image to become available.` while trying to deploy.
+1. In your custom environments you should have a new environment registered, named `clonedautoml`. If you don't build it, you may get the following error `Message: ResourceNotFound: Deployment failed due to timeout while waiting for Environment Image to become available.` while trying to deploy, in which case you will have to retry.
 
 [Optionally] Build a new machine learning model, to replace the ones in this repo:
 
