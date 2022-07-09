@@ -99,3 +99,10 @@ You can build your own docker images and push them to your container registry us
    ```bash
    docker push your-acr-name.azurecr.io/repo/customimagename:v1
    ```
+
+## References
+
+- [Deploy managed online-endpoint with network isolation](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-secure-online-endpoint?tabs=model)
+- [Update Azure CLI](https://docs.microsoft.com/en-us/cli/azure/update-azure-cli)
+- [Install and update AzureML CLI extension](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-configure-cli?tabs=public)
+- [Examples for managed online endpoint deployments](https://github.com/Azure/azureml-examples/tree/main/cli/endpoints/online)
