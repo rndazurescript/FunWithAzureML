@@ -106,6 +106,9 @@ Here is a video describing the process of deploying an AutomML generated forecas
 
 [![Deploy AutoML in Managed Online Endpoint](https://img.youtube.com/vi/k8zn0OE2pvw/0.jpg)](https://youtu.be/k8zn0OE2pvw)
 
+Tldr: Install the latest version of the azureml cli and the ml extension (allow `aka.ms` through firewall) in compute instance. Deploy using with the cloned [AzureML-AutoML environment](https://ml.azure.com/environments/AzureML-AutoML/version/115).
+
+
 ## References
 
 - [Deploy managed online-endpoint with network isolation](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-secure-online-endpoint?tabs=model)
