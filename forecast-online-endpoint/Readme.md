@@ -100,6 +100,12 @@ You can build your own docker images and push them to your container registry us
    docker push your-acr-name.azurecr.io/repo/customimagename:v1
    ```
 
+## Deploying with network isolation
+
+Here is a video describing the process of deploying an AutomML generated forecasting model in an managed online endpoint behind a vnet:
+
+[![Deploy AutoML in Managed Online Endpoint](https://img.youtube.com/vi/k8zn0OE2pvw/0.jpg)](https://youtu.be/k8zn0OE2pvw)
+
 ## References
 
 - [Deploy managed online-endpoint with network isolation](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-secure-online-endpoint?tabs=model)
