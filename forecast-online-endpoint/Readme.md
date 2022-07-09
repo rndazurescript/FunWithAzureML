@@ -1,9 +1,9 @@
 # Forecasting with online-endpoint
 
-You will have to clone the [AzureML-AutoML image](https://ml.azure.com/environments/AzureML-AutoML/version/115) in your own environment to be able to reference it.
+[Optional] If you face issues using the [AzureML-AutoML image](https://ml.azure.com/environments/AzureML-AutoML/version/115) in your own environment (e.g. behind vnet) you can clone it.
 
 1. Run `step010_clone_automl_environment.py`.
-1. In your custom environments you should have a new environment registered, named `clonedautoml`. Do not build it.
+1. In your custom environments you should have a new environment registered, named `clonedautoml`. Build it, because otherwise you may get the following error `Message: ResourceNotFound: Deployment failed due to timeout while waiting for Environment Image to become available.` while trying to deploy.
 
 [Optionally] Build a new machine learning model, to replace the ones in this repo:
 
@@ -14,9 +14,16 @@ You will have to clone the [AzureML-AutoML image](https://ml.azure.com/environme
 
 Deploy the model:
 
+1. Deploy an endpoint using `az ml online-endpoint create -f endpoint.yml`
+   > Uncomment the `public_network_access: disabled` line if you are behind a vnet.
 1. Modify the `deployment.yml` to update:
    1. `your-deployment-name` to whatever you want to name your endpoint.
-   1. `your-endpoint-name` to match an endpoint that you have already deployed
+   1. `your-endpoint-name` to match an endpoint that you deployed above
+   > If you are behind a vnet:
+   >
+   > - Uncomment the `egress_public_network_access: disabled` line.
+   > - Use the cloned environment `environment: azureml:clonedautoml:1`.
+   >
 1. Deploy the endpoint locally to test:
 
    ```bash
@@ -50,9 +57,23 @@ Deploy the model:
    az ml online-deployment create -f deployment.yml
    ```
 
-> Note: If you are behind a vnet you need to add the following line in your deployment.yml file:
-egress_public_network_access: disabled
-See [the azureml examples](https://github.com/Azure/azureml-examples/tree/main/cli/endpoints/online/managed/vnet/sample) on the settings you need to specify for the endpoint and the deployment.
+   > Note: If you are behind a vnet you need to uncomment the following line in your deployment.yml file:
+   >
+   > `egress_public_network_access: disabled`
+   >
+   > See [the azureml examples](https://github.com/Azure/azureml-examples/tree/main/cli/endpoints/online/managed/vnet/sample) on the settings you need to specify for the endpoint and the deployment.
+
+1. Test the endpoint with the following command:
+
+   ```bash
+   curl  -H "Content-Type: application/json" -d '{"Inputs": {"data": [{"DateCreated": "2022-07-07T00:00:00.000Z"}]},"GlobalParameters": {"quantiles": [0.025, 0.975]}}' -H "Authorization: Bearer KEY_FROM_ENDPOINT_PORTAL" -H "azureml-model-deployment: your-deployment-name" https://your-endpoint-name.region.inference.ml.azure.com/score
+   ```
+
+1. If you want to delete the deployment:
+
+   ```bash
+   az ml online-deployment delete -e you-endpoint-name -n your-endpoint-deployment-name
+   ```
 
 ## Building custom docker images
 
