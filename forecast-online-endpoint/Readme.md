@@ -106,8 +106,18 @@ Here is a video describing the process of deploying an AutomML generated forecas
 
 [![Deploy AutoML in Managed Online Endpoint](https://img.youtube.com/vi/k8zn0OE2pvw/0.jpg)](https://youtu.be/k8zn0OE2pvw)
 
-Tldr: Install the latest version of the azureml cli and the ml extension (allow `aka.ms` through firewall) in compute instance. Deploy using with the cloned [AzureML-AutoML environment](https://ml.azure.com/environments/AzureML-AutoML/version/115).
-
+**Tldr**: 
+1. Install the latest version of the azureml cli and the ml extension (allow `aka.ms` through firewall) in compute instance.
+   ```bash
+   az upgrade
+   az extension add -n ml --upgrade
+   ```
+2. Create a clone of [AzureML-AutoML environment](https://ml.azure.com/environments/AzureML-AutoML/version/115).
+   ```bash
+   python step010_clone_automl_environment.py
+   ```
+3. Uncomment the lines in the `endpoint.yml` and `deployment.yml`, commenting out the overlapping ones.
+4. Deploy using `az ml` commands.
 
 ## References
 
