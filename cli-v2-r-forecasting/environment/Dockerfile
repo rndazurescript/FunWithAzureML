@@ -1,5 +1,6 @@
-FROM rocker/tidyverse:4.1
-# Get later versions if needed from https://hub.docker.com/r/rocker/tidyverse/tags
+FROM ghcr.io/rocker-org/tidyverse:4.2.1
+# Get later versions if needed from https://hub.docker.com/r/rocker/tidyverse/tags or
+# even better from https://github.com/rocker-org/rocker-versioned2/pkgs/container/tidyverse
 
 # user root is required for installing packages
 USER root
@@ -23,10 +24,8 @@ RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt
 RUN apt-get update
 RUN export ACCEPT_EULA=Y;apt-get install -y msodbcsql17
 
-
 # Install CRAN packages needed for your scripts
 # We will use a single docker environment for all jobs but you can use multiple environments if you want
-RUN R -e "install.packages('devtools', repos='https://cran.rstudio.com')"
 RUN R -e "devtools::install_version('forecast', version = '8.16', repos = 'http://cran.us.r-project.org')"
 RUN R -e "devtools::install_version('optparse', version = '1.7.1', repos = 'http://cran.us.r-project.org')"
 RUN R -e "devtools::install_version('RODBC', version = '1.3', repos = 'http://cran.us.r-project.org')"
