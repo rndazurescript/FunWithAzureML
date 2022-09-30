@@ -1,10 +1,10 @@
 # To generate this file, find the imports in your file
 # Then see installed versions
 # pip freeze|grep joblib
-# > joblib==0.14.1
+# > joblib==1.2.0
 numpy==1.22.0
 pandas==0.25.3
 sklearn-pandas==1.7.0
 lightgbm==2.3.0
-joblib==0.14.1
+joblib==1.2.0
 azureml-sdk==1.19.0
