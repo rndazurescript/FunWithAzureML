@@ -1,0 +1,29 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+
+display_name: company_analysis
+description: Pipeline to analyze a company
+experiment_name: Notebook2Pipeline
+
+compute: azureml:cpu-cluster
+
+inputs:
+  company_code: "CompanyA"
+
+outputs:
+  output_folder:
+    type: uri_folder
+    mode: rw_mount
+    path: azureml://datastores/workspaceblobstore/paths/Outputs/
+
+jobs:
+  analysis:
+    type: command
+    component: ./companyAnalysisComponent.yml
+    inputs:
+      company_code_from_component: ${{parent.inputs.company_code}}
+      input_folder: 
+        type: uri_folder
+        path: azureml://datastores/workspaceblobstore/paths/Companies/
+    outputs:
+      output_folder_from_component: ${{parent.outputs.output_folder}}

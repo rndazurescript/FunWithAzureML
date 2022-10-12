@@ -1,0 +1,25 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+display_name: company_analysis
+experiment_name: Notebook2Pipeline
+compute: azureml:cpu-cluster
+  
+inputs:
+  company_code: "CompanyA"
+  input_folder: 
+    type: uri_folder
+    path: azureml://datastores/workspaceblobstore/paths/Companies/
+outputs:
+  output_folder:
+    type: uri_folder
+    path: azureml://datastores/workspaceblobstore/paths/Outputs/
+jobs:
+  analysis:
+    code: ./Code
+    command: python analysis.py --company-code ${{inputs.company_code}} --input-folder ${{inputs.input_folder}} --output-folder ${{outputs.output_folder}}  
+    environment: azureml:analysis-environment@latest
+    inputs:
+      company_code: ${{parent.inputs.company_code}}
+      input_folder: ${{parent.inputs.input_folder}}
+    outputs:
+      output_folder: ${{parent.outputs.output_folder}}

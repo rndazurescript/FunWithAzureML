@@ -1,0 +1,17 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+is_deterministic: false
+name: company_analysis
+display_name: Analysis of a company
+code: ./Code
+command: python analysis.py --company-code ${{inputs.company_code_from_component}} --input-folder ${{inputs.input_folder}} --output-folder ${{outputs.output_folder_from_component}} 
+environment: azureml:analysis-environment-py38@latest
+inputs:
+    company_code_from_component: 
+        type: string
+    input_folder: 
+        type: path
+outputs:
+    output_folder_from_component:
+        type: path
