@@ -6,6 +6,8 @@ This folder contains the sample code used in the following video:
 
 > NOTE: Datastores moved under Data and do not exist on the root level menu anymore.
 
+> NOTE: If you are planning to run this behind a v-net, you can build a docker image on your compute instance, push it to your ACR and then register an environment and then use it (similar to the copy activity we did in [forecast online endpoint example](../forecast-online-endpoint)). 
+
 ## Curate the code
 
 Let's assume that you start from [a notebook](./original_notebook.ipynb) that does an analysis reading [an Excel file](./CompanyA.xlsx).
