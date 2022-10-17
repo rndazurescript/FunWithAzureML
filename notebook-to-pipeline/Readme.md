@@ -4,6 +4,8 @@ This folder contains the sample code used in the following video:
 
 [![Notebook to AzureML pipeline](https://img.youtube.com/vi/4QPqbLf57iU/0.jpg)](https://youtu.be/4QPqbLf57iU)
 
+> NOTE: Datastores moved under Data and do not exist on the root level menu anymore.
+
 ## Curate the code
 
 Let's assume that you start from [a notebook](./original_notebook.ipynb) that does an analysis reading [an Excel file](./CompanyA.xlsx).
