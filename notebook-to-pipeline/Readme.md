@@ -6,7 +6,13 @@ This folder contains the sample code used in the following video:
 
 > NOTE: Datastores moved under Data and do not exist on the root level menu anymore.
 
-> NOTE: If you are planning to run this behind a v-net, you can build a docker image on your compute instance, push it to your ACR and then register an environment and then use it (similar to the copy activity we did in [forecast online endpoint example](../forecast-online-endpoint)). 
+> NOTE: If you are planning to run this behind a v-net, you can build a docker image on your compute instance, push it to your ACR and then use that in your component using the following code:
+> ```yaml
+> environment:
+>   image: <your-acr-name>.azurecr.io/customrepo/customimagename:v1
+>   name:  analysis-environment
+> ``` 
+> See [the forecast online endpoint behind vnet video](https://github.com/rndazurescript/FunWithAzureML/tree/master/forecast-online-endpoint#deploying-with-network-isolation) to see how creating a docker image works.
 
 ## Curate the code
 
